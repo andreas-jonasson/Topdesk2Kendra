@@ -8,20 +8,26 @@ import java.io.FileReader;
 
 public class Configuration
 {
-    public String topdesk_username;
-    public String topdesk_password;
-    public String topdesk_domain;
-    public String topdesk_endpoint;
+    public final String topdesk_username;
+    public final String topdesk_password;
+    public final String topdesk_domain;
+    public final String topdesk_endpoint_knowledgeItems;
+
+    public Configuration(String topdesk_username, String topdesk_password, String topdesk_domain, String topdesk_endpoint_knowledgeItems) {
+        this.topdesk_username = topdesk_username;
+        this.topdesk_password = topdesk_password;
+        this.topdesk_domain = topdesk_domain;
+        this.topdesk_endpoint_knowledgeItems = topdesk_endpoint_knowledgeItems;
+    }
 
     public static Configuration getInstance()
     {
         Gson gson = new GsonBuilder().create();
         FileReader fileReader = null;
-        Configuration configuration;
 
         try
         {
-            fileReader = new FileReader("config.json");
+            fileReader = new FileReader("./config.json");
         }
         catch (FileNotFoundException e)
         {
@@ -29,22 +35,16 @@ public class Configuration
         }
 
         assert fileReader != null;
-        configuration =  gson.fromJson(fileReader, Configuration.class);
-
-        if (configuration.topdesk_endpoint == null)
-            configuration.topdesk_endpoint = configuration.topdesk_domain + "/tas/api/";
-
-        return configuration;
+        return gson.fromJson(fileReader, Configuration.class);
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Configuration{" +
                 "topdesk_username='" + topdesk_username + '\'' +
                 ", topdesk_password='" + topdesk_password + '\'' +
                 ", topdesk_domain='" + topdesk_domain + '\'' +
-                ", topdesk_endpoint='" + topdesk_endpoint + '\'' +
+                ", topdesk_endpoint_knowledgeItems='" + topdesk_endpoint_knowledgeItems + '\'' +
                 '}';
     }
 }
