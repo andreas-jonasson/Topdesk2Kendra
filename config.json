@@ -1,5 +1,4 @@
 {
-  "topdesk_credentials_file": "./credentials.json",
-  "topdesk_domain": "chalmers.topdesk.net",
-  "topdesk_endpoint_knowledgeItems": "https://chalmers.topdesk.net/tas/api/knowledgeItems/"
+  "topdesk_credentials_file": "./andreas-credentials.json",
+  "topdesk_endpoint_knowledgeItems": "https://chalmers.topdesk.net/tas/api/knowledgeItems"
 }
