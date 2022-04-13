@@ -13,14 +13,9 @@ import java.nio.charset.StandardCharsets;
 
 public class TopDesk
 {
-    private final Configuration configuration = Configuration.getInstance();
-    private final String endpoint = configuration.topdesk_endpoint_knowledgeItems;
-    private final String user = configuration.topdesk_credentials.topdesk_username;
-    private final String password = configuration.topdesk_credentials.topdesk_password;
-
-    void getRequest() throws IOException
+    HttpResponse getRequestWithBasicAuth(String requestURL, String user, String password) throws IOException
     {
-        HttpGet request = new HttpGet(endpoint);
+        HttpGet request = new HttpGet(requestURL);
         String auth = user + ":" + password;
         byte[] encodedAuth = Base64.encodeBase64(
                 auth.getBytes(StandardCharsets.ISO_8859_1));
@@ -28,8 +23,7 @@ public class TopDesk
         request.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
 
         HttpClient client = HttpClientBuilder.create().build();
-        HttpResponse response = client.execute(request);
 
-        System.out.println(response.getStatusLine());
+        return client.execute(request);
     }
 }

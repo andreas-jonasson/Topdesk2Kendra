@@ -24,4 +24,11 @@ class ConfigurationTest
         assertNotNull(configuration, "Configuration.getInstance() did not return a valid instance.");
         assertInstanceOf(Configuration.class, configuration, "Configuration.getInstance() did not return an instance of Configuration.");
     }
+
+    @Test
+    @DisplayName("Configuration.toString() returns a string")
+    public void configuration_toStringReturnsString()
+    {
+        assertInstanceOf(String.class, configuration.toString(), "Configuration.toString() did not return a String");
+    }
 }
