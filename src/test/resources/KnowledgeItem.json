@@ -1,0 +1,44 @@
+{
+  "parent": {
+    "number": "KI 0080"
+  },
+  "translation": {
+    "language": "en",
+    "content": {
+      "title": "Printer has insufficient paper",
+      "description": "<b>bold</b><br><i>italic</i><br><u>underline</u><br><a href=\"http://www.topdesk.com\">Link to TOPdesk</a>\n",
+      "content": "<b>bold</b><br><i>italic</i><br><u>underline</u><br><a href=\"http://www.topdesk.com\">Link to TOPdesk</a><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=\">\n",
+      "commentsForOperators": "<b>bold</b><br><i>italic</i><br><u>underline</u><br><a href=\"http://www.topdesk.com\">Link to TOPdesk</a><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=\">\n",
+      "keywords": "printer, IPv4, DNS"
+    },
+    "creator": {
+      "id": "D8A884C4-0876-4ADF-B072-50DD48033904",
+      "name": "string"
+    },
+    "creationDate": "2019-08-01T12:13:00Z",
+    "modifier": {
+      "id": "D8A884C4-0876-4ADF-B072-50DD48033904",
+      "name": "string"
+    },
+    "modificationDate": "2019-08-04T12:13:00Z"
+  },
+  "visibility": {
+    "sspVisibility": "NOT_VISIBLE",
+    "sspVisibleFrom": "2019-08-01T12:13:00Z",
+    "sspVisibleUntil": "2019-08-01T12:13:00Z",
+    "sspVisibilityFilteredOnBranches": true,
+    "operatorVisibilityFilteredOnBranches": true,
+    "openKnowledgeItem": true
+  },
+  "status": {
+    "id": "D8A884C4-0876-4ADF-B072-50DD48033904"
+  },
+  "manager": {
+    "id": "D8A884C4-0876-4ADF-B072-50DD48033904"
+  },
+  "externalLink": {
+    "id": "external-id-1",
+    "type": "2",
+    "date": "2022-04-14T08:10:07.554Z"
+  }
+}
