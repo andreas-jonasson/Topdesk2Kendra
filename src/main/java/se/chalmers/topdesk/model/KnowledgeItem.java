@@ -2,6 +2,8 @@ package se.chalmers.topdesk.model;
 
 public class KnowledgeItem
 {
+    public String id;
+    public String number;
     public KnowledgeItemParent parent;
     public KnowledgeItemTranslation translation;
     public KnowledgeItemVisibility visibility;
