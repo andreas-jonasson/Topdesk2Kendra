@@ -58,8 +58,8 @@ class TopDeskTest
             assertNotNull(items.get(0), "Received a list with null items.");
             assertInstanceOf(KnowledgeItem.class, items.get(0), "Received a list of the wrong type.");
 
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            System.out.println(gson.toJson(items));
+            //Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            //System.out.println(gson.toJson(items));
         }
     }
 

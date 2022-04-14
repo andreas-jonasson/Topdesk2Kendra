@@ -20,16 +20,41 @@ import java.util.List;
 
 public class TopDesk
 {
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final String ONLY_ACTIVE_PARAMETER = "query=visibility.sspVisibility==VISIBLE";
+    private static final String FIELDS_PARAMETER = "fields=parent,visibility,status,language,title,content,keywords";
+
     public List<KnowledgeItem> getAllKnowledgeItems(String endpoint, String user, String password) throws IOException
     {
-        //TODO Need to consider start, page_size and fields...
-        List<KnowledgeItem> knowledgeItems = new ArrayList<>();
-        HttpResponse response = getRequestWithBasicAuth(endpoint, user, password);
-        InputStreamReader reader = new InputStreamReader(response.getEntity().getContent());
-        Gson gson = new GsonBuilder().create();
-        GetKnowledgeItemRequest result = gson.fromJson(reader, GetKnowledgeItemRequest.class);
+        ArrayList<KnowledgeItem> knowledgeItems = new ArrayList<>();
+        int start = 0;
+        int page_size = 100;
 
-        return result.item;
+        while(true)
+        {
+            String pageParameter = "start=" + start + "&page_size=" + page_size;
+            HttpResponse response = getRequestWithBasicAuth(endpoint + "?" + pageParameter + "&" + ONLY_ACTIVE_PARAMETER + "&" + FIELDS_PARAMETER, user, password);
+            GetKnowledgeItemRequest responseKnowledgeItems = parseKnowledgeItemRequest(response);
+
+            knowledgeItems.addAll(responseKnowledgeItems.item);
+
+            if (responseKnowledgeItems.item.size() < page_size)
+                break;
+
+            start += page_size;
+
+            if (start > 5000) // Don't go on forever... throw exception later.
+                break;
+        }
+
+        System.out.println("Size: " + knowledgeItems.size());
+        return knowledgeItems;
+    }
+
+    private GetKnowledgeItemRequest parseKnowledgeItemRequest(HttpResponse response) throws IOException
+    {
+        InputStreamReader reader = new InputStreamReader(response.getEntity().getContent());
+        return gson.fromJson(reader, GetKnowledgeItemRequest.class);
     }
 
     HttpResponse getRequestWithBasicAuth(String requestURL, String user, String password) throws IOException
