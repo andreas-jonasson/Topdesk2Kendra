@@ -1,11 +1,8 @@
 package se.chalmers.topdesk;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.http.HttpResponse;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import se.chalmers.topdesk.model.GetKnowledgeItemRequest;
 import se.chalmers.topdesk.model.KnowledgeItem;
 
 import java.io.IOException;
@@ -15,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TopDeskTest
 {
-    private TopDesk topDesk;
-    private String knowledgeItemsEndpoint;
-    private String user;
-    private String password;
-    private List<KnowledgeItem> knowledgeItems;
+    private static TopDesk topDesk;
+    private static String knowledgeItemsEndpoint;
+    private static String user;
+    private static String password;
+    private static List<KnowledgeItem> knowledgeItems;
 
-    @BeforeEach
-    void setUp()
+    @BeforeAll
+    static void setUpClass()
     {
         Configuration configuration = Configuration.getInstance();
         topDesk = new TopDesk();
@@ -97,19 +94,17 @@ class TopDeskTest
     }
 
     @Test
-    public void listAllKnowledgeItems_itemsContainKeyword()
+    public void listAllKnowledgeItems_itemsContainKeywordString()
     {
         if (knowledgeItems != null)
         {
-            assertNotNull(knowledgeItems.get(0).translation.content.keywords);
-            assertInstanceOf(String.class, knowledgeItems.get(0).translation.content.keywords);
+            for (KnowledgeItem item: knowledgeItems)
+            {
+                if (item.translation.content.keywords != null)
+                {
+                    assertInstanceOf(String.class, item.translation.content.keywords);
+                }
+            }
         }
-    }
-
-    @Test
-    public void getContent_hasNoQuoting()
-    {
-        for (KnowledgeItem i : knowledgeItems)
-            System.out.println(i.getContent());
     }
 }
