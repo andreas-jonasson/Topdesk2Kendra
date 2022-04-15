@@ -10,4 +10,9 @@ public class KnowledgeItem
     public KnowledgeItemStatus status;
     public KnowledgeItemManager manager;
     public KnowledgeItemExternalLink externalLink;
+
+    public String getContent()
+    {
+        return translation.content.content;
+    }
 }

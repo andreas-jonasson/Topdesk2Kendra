@@ -30,12 +30,21 @@ class TopDeskTest
         user = configuration.topdesk_credentials.topdesk_username;
         password = configuration.topdesk_credentials.topdesk_password;
         knowledgeItems = null;
+        try
+        {
+            knowledgeItems = topDesk.getAllKnowledgeItems(knowledgeItemsEndpoint, user, password);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void getRequestWithBasicAuth_returnsHttpResponse()
     {
-        try {
+        try
+        {
             assertInstanceOf(HttpResponse.class, topDesk.getRequestWithBasicAuth(knowledgeItemsEndpoint, user, password));
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,15 +54,6 @@ class TopDeskTest
     @Test
     public void listAllKnowledgeItems_returnsAListOfKnowledgeItem()
     {
-        try
-        {
-            knowledgeItems = topDesk.getAllKnowledgeItems(knowledgeItemsEndpoint, user, password);
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
         if (!password.equals("password")) // Only run this test when you have valid credentials.
         {
             assertNotNull(knowledgeItems, "Received null.");
@@ -71,8 +71,8 @@ class TopDeskTest
     {
         if (knowledgeItems != null)
         {
-            assertNotNull(knowledgeItems.get(0).parent.id);
-            assertInstanceOf(String.class, knowledgeItems.get(0).parent.id);
+            assertNotNull(knowledgeItems.get(1).parent.id);
+            assertInstanceOf(String.class, knowledgeItems.get(1).parent.id);
         }
     }
 
@@ -106,4 +106,10 @@ class TopDeskTest
         }
     }
 
+    @Test
+    public void getContent_hasNoQuoting()
+    {
+        for (KnowledgeItem i : knowledgeItems)
+            System.out.println(i.getContent());
+    }
 }
