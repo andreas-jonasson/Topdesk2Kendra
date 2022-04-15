@@ -19,6 +19,7 @@ class TopDeskTest
     private String knowledgeItemsEndpoint;
     private String user;
     private String password;
+    private List<KnowledgeItem> knowledgeItems;
 
     @BeforeEach
     void setUp()
@@ -28,6 +29,7 @@ class TopDeskTest
         knowledgeItemsEndpoint = configuration.topdesk_endpoint_knowledgeItems;
         user = configuration.topdesk_credentials.topdesk_username;
         password = configuration.topdesk_credentials.topdesk_password;
+        knowledgeItems = null;
     }
 
     @Test
@@ -43,23 +45,64 @@ class TopDeskTest
     @Test
     public void listAllKnowledgeItems_returnsAListOfKnowledgeItem()
     {
-        List<KnowledgeItem> items = null;
-
-        try {
-            items = topDesk.getAllKnowledgeItems(knowledgeItemsEndpoint, user, password);
-        } catch (IOException e) {
+        try
+        {
+            knowledgeItems = topDesk.getAllKnowledgeItems(knowledgeItemsEndpoint, user, password);
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
         if (!password.equals("password")) // Only run this test when you have valid credentials.
         {
-            assertNotNull(items, "Received null.");
-            assertFalse(items.isEmpty(), "Received en empty List, might be ok if there are no knowledge items.");
-            assertNotNull(items.get(0), "Received a list with null items.");
-            assertInstanceOf(KnowledgeItem.class, items.get(0), "Received a list of the wrong type.");
+            assertNotNull(knowledgeItems, "Received null.");
+            assertFalse(knowledgeItems.isEmpty(), "Received en empty List, might be ok if there are no knowledge items.");
+            assertNotNull(knowledgeItems.get(0), "Received a list with null items.");
+            assertInstanceOf(KnowledgeItem.class, knowledgeItems.get(0), "Received a list of the wrong type.");
 
             //Gson gson = new GsonBuilder().setPrettyPrinting().create();
             //System.out.println(gson.toJson(items));
+        }
+    }
+
+    @Test
+    public void listAllKnowledgeItems_itemsContainParent()
+    {
+        if (knowledgeItems != null)
+        {
+            assertNotNull(knowledgeItems.get(0).parent.id);
+            assertInstanceOf(String.class, knowledgeItems.get(0).parent.id);
+        }
+    }
+
+    @Test
+    public void listAllKnowledgeItems_itemsContainContent()
+    {
+        if (knowledgeItems != null)
+        {
+            assertNotNull(knowledgeItems.get(0).translation.content.content);
+            assertInstanceOf(String.class, knowledgeItems.get(0).translation.content.content);
+        }
+    }
+
+    @Test
+    public void listAllKnowledgeItems_itemsContainLanguage()
+    {
+        if (knowledgeItems != null)
+        {
+            assertNotNull(knowledgeItems.get(0).translation.language);
+            assertInstanceOf(String.class, knowledgeItems.get(0).translation.language);
+        }
+    }
+
+    @Test
+    public void listAllKnowledgeItems_itemsContainKeyword()
+    {
+        if (knowledgeItems != null)
+        {
+            assertNotNull(knowledgeItems.get(0).translation.content.keywords);
+            assertInstanceOf(String.class, knowledgeItems.get(0).translation.content.keywords);
         }
     }
 

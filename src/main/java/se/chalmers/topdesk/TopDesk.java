@@ -33,7 +33,8 @@ public class TopDesk
         while(true)
         {
             String pageParameter = "start=" + start + "&page_size=" + page_size;
-            HttpResponse response = getRequestWithBasicAuth(endpoint + "?" + pageParameter + "&" + ONLY_ACTIVE_PARAMETER + "&" + FIELDS_PARAMETER, user, password);
+            String requestUrl = concatenateGetParameters(endpoint, pageParameter, ONLY_ACTIVE_PARAMETER, FIELDS_PARAMETER);
+            HttpResponse response = getRequestWithBasicAuth(requestUrl, user, password);
             GetKnowledgeItemRequest responseKnowledgeItems = parseKnowledgeItemRequest(response);
 
             knowledgeItems.addAll(responseKnowledgeItems.item);
@@ -47,8 +48,35 @@ public class TopDesk
                 break;
         }
 
-        System.out.println("Size: " + knowledgeItems.size());
+        //System.out.println("Number of knowledge items found: " + knowledgeItems.size());
         return knowledgeItems;
+    }
+
+    private String concatenateGetParameters(String endpointUrl, String... parameters)
+    {
+        if (parameters.length == 0)
+            return endpointUrl;
+
+        StringBuilder result = new StringBuilder();
+        result.append(endpointUrl);
+        result.append("?");
+
+        boolean first = true;
+        for (String p : parameters)
+        {
+            if (first)
+            {
+                result.append(p);
+                first = false;
+            }
+            else
+            {
+                result.append("&");
+                result.append(p);
+            }
+        }
+
+        return result.toString();
     }
 
     private GetKnowledgeItemRequest parseKnowledgeItemRequest(HttpResponse response) throws IOException
