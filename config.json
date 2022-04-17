@@ -1,4 +1,5 @@
 {
   "topdesk_credentials_file": "./andreas-credentials.json",
-  "topdesk_endpoint_knowledgeItems": "https://chalmers.topdesk.net/tas/api/knowledgeItems"
+  "topdesk_endpoint_knowledgeItems": "https://chalmers.topdesk.net/tas/api/knowledgeItems",
+  "topdesk_default_language": "sv"
 }

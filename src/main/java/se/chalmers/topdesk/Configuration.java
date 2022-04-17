@@ -13,12 +13,14 @@ public class Configuration
     public Credentials topdesk_credentials;
     public final String topdesk_credentials_file;
     public final String topdesk_endpoint_knowledgeItems;
+    public final String topdesk_default_language;
 
-    public Configuration(Credentials topdesk_credentials, String topdesk_credentials_file, String topdesk_endpoint_knowledgeItems)
+    public Configuration(Credentials topdesk_credentials, String topdesk_credentials_file, String topdesk_endpoint_knowledgeItems, String topdesk_default_language)
     {
         this.topdesk_credentials = topdesk_credentials;
         this.topdesk_credentials_file = topdesk_credentials_file;
         this.topdesk_endpoint_knowledgeItems = topdesk_endpoint_knowledgeItems;
+        this.topdesk_default_language = topdesk_default_language;
     }
 
 

@@ -22,7 +22,7 @@ public class TopDesk
 {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final String ONLY_ACTIVE_PARAMETER = "query=visibility.sspVisibility==VISIBLE";
-    private static final String FIELDS_PARAMETER = "fields=parent,visibility,status,language,title,content,keywords";
+    private static final String FIELDS_PARAMETER = "fields=parent,visibility,status,language,title,content,keywords,creationDate,modificationDate";
 
     public List<KnowledgeItem> getAllKnowledgeItems(String endpoint, String user, String password) throws IOException
     {

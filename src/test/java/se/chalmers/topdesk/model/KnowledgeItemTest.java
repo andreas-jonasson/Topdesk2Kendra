@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.time.ZonedDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,4 +56,71 @@ class KnowledgeItemTest
         translation.modificationDate->  _last_updated_at (ISO 8601 encoded string) – The date and time that the document was last updated. ***
         translation.language		->  _language_code (String) ****
      */
+
+    @Test
+    public void getCreationDate_returnsString()
+    {
+        assertNotNull((knowledgeItem.getCreationDate()));
+        assertInstanceOf(String.class, knowledgeItem.getCreationDate());
+    }
+
+    @Test
+    public void getCreationDate_returnsISO8601Date()
+    {
+        assertDoesNotThrow(() -> { ZonedDateTime.parse(knowledgeItem.getCreationDate());} , "Failed to parse string.");
+    }
+
+    @Test
+    public void getModificationDate_returnsString()
+    {
+        assertNotNull((knowledgeItem.getModificationDate()));
+        assertInstanceOf(String.class, knowledgeItem.getModificationDate());
+    }
+
+    @Test
+    public void getModificationDate_returnsISO8601Date()
+    {
+        assertDoesNotThrow(() -> { ZonedDateTime.parse(knowledgeItem.getModificationDate());} , "Failed to parse string.");
+    }
+
+    @Test
+    public void getDataSource_returnsTopDeskString()
+    {
+        assertEquals("TopDesk", knowledgeItem.getDataSource());
+    }
+
+    @Test
+    public void getDocumentBody_returnsString()
+    {
+        assertNotNull((knowledgeItem.getDocumentBody()));
+        assertInstanceOf(String.class, knowledgeItem.getDocumentBody());
+    }
+
+    @Test
+    public void getDocumentTitle_returnsString()
+    {
+        assertNotNull((knowledgeItem.getDocumentTitle()));
+        assertInstanceOf(String.class, knowledgeItem.getDocumentTitle());
+    }
+
+    @Test
+    public void getDocumentId_returnsString()
+    {
+        assertNotNull((knowledgeItem.getDocumentId()));
+        assertInstanceOf(String.class, knowledgeItem.getDocumentId());
+    }
+
+    @Test
+    public void getDocumentType_returnStringHtml()
+    {
+        assertInstanceOf(String.class, knowledgeItem.getDocumentType());
+        assertEquals("html", knowledgeItem.getDocumentType());
+    }
+
+    @Test
+    public void getLanguageCode_returnString()
+    {
+        assertNotNull((knowledgeItem.getLanguageCode()));
+        assertInstanceOf(String.class, knowledgeItem.getLanguageCode());
+    }
 }

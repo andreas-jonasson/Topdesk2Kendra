@@ -6,7 +6,7 @@ Transfers knowledge articles (KnowledgeItem) from TopDesk to be indexed by Kendr
         translation.creationDate 	->  _created_at (ISO 8601 encoded string) ***
         "TopDesk"                   ->  _data_source_id (String) ***
         translation.content.content	->  _document_body (String) ****
-        id || number                ->  _document_id (String) ****
+        number || id                ->  _document_id (String) ****
         translation.content.title	->  _document_title (String) ***
         "html"                      ->  _file_type (String) ****
         translation.modificationDate->  _last_updated_at ***
