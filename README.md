@@ -14,7 +14,7 @@ Transfers knowledge articles (KnowledgeItem) from TopDesk to be indexed by Kendr
 
 
 ## Configuration
- * `./config.json`     Contains the general configuration for the installati056on. Contains a reference to the credentials file, that is not checked into git.
+ * `./config.json`     Contains the general configuration for the installation. Contains a reference to the credentials file, that is not checked into git.
  * `./default-credentials.json`    Shows how to set up the credentials.
 # Welcome to your CDK Java project!
 
