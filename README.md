@@ -1,3 +1,21 @@
+# TopDesk2Kendra
+Transfers knowledge articles (KnowledgeItem) from TopDesk to be indexed by Kendra.
+
+## Mappings from TopDesk to Kendra metadata:
+        hmmm... Depends on domain?  ->  _category (String) **
+        translation.creationDate 	->  _created_at (ISO 8601 encoded string) ***
+        "TopDesk"                   ->  _data_source_id (String) ***
+        translation.content.content	->  _document_body (String) ****
+        id || number                ->  _document_id (String) ****
+        translation.content.title	->  _document_title (String) ***
+        "html"                      ->  _file_type (String) ****
+        translation.modificationDate->  _last_updated_at ***
+        translation.language        ->  _language_code (String) ****
+
+
+## Configuration
+ * `./config.json`     Contains the general configuration for the installati056on. Contains a reference to the credentials file, that is not checked into git.
+ * `./default-credentials.json`    Shows how to set up the credentials.
 # Welcome to your CDK Java project!
 
 This is a blank project for Java development with CDK.
