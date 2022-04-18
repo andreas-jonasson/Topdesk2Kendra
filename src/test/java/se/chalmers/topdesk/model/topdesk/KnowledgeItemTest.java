@@ -44,21 +44,6 @@ class KnowledgeItemTest
         assertInstanceOf(String.class, knowledgeItem.getContent());
     }
 
-    /*
-        Mappings from TopDesk to Kendra metadata:
-        translation.creator.name 	->  _authors (String list) *
-        hmmm... Depends on domain?      _category (String) **
-        translation.creationDate 	->  _created_at (ISO 8601 encoded string) ***
-        "TopDesk" 			        ->  _data_source_id (String) ***
-        translation.content.content	->  _document_body (String) – The content of the document. ****
-        id || number 			    ->  _document_id (String) – A unique identifier for the document. ****
-        translation.content.title	->  _document_title (String) – The title of the document. ***
-        hmm... Maybe useful, or not.    _faq_id (String) – If this is an FAQ question and answer, a unique identifier for them. *
-        "html" 				        ->  _file_type (String) – The file type of the document, such as pdf or doc. ****
-        translation.modificationDate->  _last_updated_at (ISO 8601 encoded string) – The date and time that the document was last updated. ***
-        translation.language		->  _language_code (String) ****
-     */
-
     @Test
     public void getCreationDate_returnsString()
     {
@@ -116,7 +101,7 @@ class KnowledgeItemTest
     public void getDocumentType_returnStringHtml()
     {
         assertInstanceOf(String.class, knowledgeItem.getDocumentType());
-        assertEquals("html", knowledgeItem.getDocumentType());
+        assertEquals("HTML", knowledgeItem.getDocumentType());
     }
 
     @Test
@@ -124,5 +109,48 @@ class KnowledgeItemTest
     {
         assertNotNull((knowledgeItem.getLanguageCode()));
         assertInstanceOf(String.class, knowledgeItem.getLanguageCode());
+    }
+
+    @Test
+    public void getAsHtml_returnString()
+    {
+        assertNotNull((knowledgeItem.getAsHtml()));
+        assertInstanceOf(String.class, knowledgeItem.getAsHtml());
+    }
+
+    @Test
+    public void getAsHtml_looksLikeHtml()
+    {
+        assertTrue(knowledgeItem.getAsHtml().startsWith("<!DOCTYPE html>"));
+        assertTrue(knowledgeItem.getAsHtml().contains("<body>"));
+        System.out.println(knowledgeItem.getAsHtml());
+    }
+
+    @Test
+    public void getMetadataJson_returnString()
+    {
+        assertNotNull((knowledgeItem.getMetadataJson()));
+        assertInstanceOf(String.class, knowledgeItem.getMetadataJson());
+    }
+
+    @Test
+    public void getMetadataJson_canBeTurnedIntoMetadataObject()
+    {
+        KnowledgeItem parsedKnowledgeItem = gson.fromJson(knowledgeItem.getMetadataJson(), KnowledgeItem.class);
+        assertEquals(knowledgeItem, parsedKnowledgeItem);
+    }
+
+    @Test
+    public void equals_returnsTrueWhenEqual()
+    {
+        try
+        {
+            FileReader fileReader = new FileReader("./src/test/resources/KnowledgeItem.json");
+            KnowledgeItem knowledgeItem2 = gson.fromJson(fileReader, KnowledgeItem.class);
+            assertTrue(knowledgeItem2.equals(knowledgeItem));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
