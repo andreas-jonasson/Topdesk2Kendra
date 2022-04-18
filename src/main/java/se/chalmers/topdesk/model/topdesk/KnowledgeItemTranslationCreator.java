@@ -1,4 +1,4 @@
-package se.chalmers.topdesk.model;
+package se.chalmers.topdesk.model.topdesk;
 
 public class KnowledgeItemTranslationCreator
 {

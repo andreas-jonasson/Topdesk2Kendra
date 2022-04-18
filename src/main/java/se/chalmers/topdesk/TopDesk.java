@@ -9,8 +9,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import se.chalmers.topdesk.model.GetKnowledgeItemRequest;
-import se.chalmers.topdesk.model.KnowledgeItem;
+import se.chalmers.topdesk.model.topdesk.GetKnowledgeItemRequest;
+import se.chalmers.topdesk.model.topdesk.KnowledgeItem;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

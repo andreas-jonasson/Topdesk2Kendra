@@ -1,9 +1,11 @@
-package se.chalmers.topdesk.model;
+package se.chalmers.topdesk.model.topdesk;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.chalmers.topdesk.model.topdesk.KnowledgeItem;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.time.ZonedDateTime;

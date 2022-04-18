@@ -1,0 +1,21 @@
+{
+  "DocumentId": "document ID",
+  "Attributes": {
+    "_category": "document category",
+    "_created_at": "ISO 8601 encoded string",
+    "_last_updated_at": "ISO 8601 encoded string",
+    "_source_uri": "document URI",
+    "_version": "file version",
+    "_view_count": 14,
+    "custom attribute key": "custom attribute value"
+  },
+  "AccessControlList": [
+    {
+      "Name": "user name",
+      "Type": "GROUP | USER",
+      "Access": "ALLOW | DENY"
+    }
+  ],
+  "Title": "document title",
+  "ContentType": "HTML | MS_WORD | PDF | PLAIN_TEXT | PPT"
+}

@@ -1,11 +1,9 @@
 package se.chalmers.topdesk;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.apache.http.HttpResponse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import se.chalmers.topdesk.model.KnowledgeItem;
+import se.chalmers.topdesk.model.topdesk.KnowledgeItem;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
