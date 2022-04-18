@@ -27,6 +27,8 @@ public class KnowledgeItem
         return translation.modificationDate;
     }
 
+    //TODO public String getItemAsHtml()
+
     public String getDataSource()
     {
         return "TopDesk";
@@ -51,7 +53,7 @@ public class KnowledgeItem
 
     public String getDocumentType()
     {
-        return "html";
+        return "HTML";
     }
 
     public String getLanguageCode()
