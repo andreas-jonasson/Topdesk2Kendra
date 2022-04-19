@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import se.chalmers.topdesk.model.topdesk.KnowledgeItem;
+import se.chalmers.topdesk.model.kendra.Metadata;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -123,7 +123,6 @@ class KnowledgeItemTest
     {
         assertTrue(knowledgeItem.getAsHtml().startsWith("<!DOCTYPE html>"));
         assertTrue(knowledgeItem.getAsHtml().contains("<body>"));
-        System.out.println(knowledgeItem.getAsHtml());
     }
 
     @Test
@@ -136,8 +135,8 @@ class KnowledgeItemTest
     @Test
     public void getMetadataJson_canBeTurnedIntoMetadataObject()
     {
-        KnowledgeItem parsedKnowledgeItem = gson.fromJson(knowledgeItem.getMetadataJson(), KnowledgeItem.class);
-        assertEquals(knowledgeItem, parsedKnowledgeItem);
+        Metadata metadata = gson.fromJson(knowledgeItem.getMetadataJson(), Metadata.class);
+        assertNotNull(metadata);
     }
 
     @Test
@@ -147,7 +146,21 @@ class KnowledgeItemTest
         {
             FileReader fileReader = new FileReader("./src/test/resources/KnowledgeItem.json");
             KnowledgeItem knowledgeItem2 = gson.fromJson(fileReader, KnowledgeItem.class);
-            assertTrue(knowledgeItem2.equals(knowledgeItem));
+            assertEquals(knowledgeItem2, knowledgeItem);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void equals_returnFalseWhenNotEqual()
+    {
+        try
+        {
+            FileReader fileReader = new FileReader("./src/test/resources/KnowledgeItem.json");
+            KnowledgeItem knowledgeItem2 = gson.fromJson(fileReader, KnowledgeItem.class);
+            knowledgeItem2.translation.language = "Something else";
+            assertNotEquals(knowledgeItem2, knowledgeItem);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
