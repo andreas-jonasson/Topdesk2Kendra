@@ -20,11 +20,11 @@ import java.util.List;
 
 public class TopDesk
 {
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static final String ONLY_ACTIVE_PARAMETER = "query=visibility.sspVisibility==VISIBLE";
     private static final String FIELDS_PARAMETER = "fields=parent,visibility,status,language,title,content,keywords,creationDate,modificationDate";
 
-    public List<KnowledgeItem> getAllKnowledgeItems(String endpoint, String user, String password) throws IOException
+    public static List<KnowledgeItem> getAllKnowledgeItems(String endpoint, String user, String password) throws IOException
     {
         ArrayList<KnowledgeItem> knowledgeItems = new ArrayList<>();
         int start = 0;
@@ -52,7 +52,7 @@ public class TopDesk
         return knowledgeItems;
     }
 
-    private String concatenateGetParameters(String endpointUrl, String... parameters)
+    private static String concatenateGetParameters(String endpointUrl, String... parameters)
     {
         if (parameters.length == 0)
             return endpointUrl;
@@ -79,13 +79,13 @@ public class TopDesk
         return result.toString();
     }
 
-    private GetKnowledgeItemRequest parseKnowledgeItemRequest(HttpResponse response) throws IOException
+    private static GetKnowledgeItemRequest parseKnowledgeItemRequest(HttpResponse response) throws IOException
     {
         InputStreamReader reader = new InputStreamReader(response.getEntity().getContent());
         return gson.fromJson(reader, GetKnowledgeItemRequest.class);
     }
 
-    HttpResponse getRequestWithBasicAuth(String requestURL, String user, String password) throws IOException
+    static HttpResponse getRequestWithBasicAuth(String requestURL, String user, String password) throws IOException
     {
         HttpGet request = new HttpGet(requestURL);
         String auth = user + ":" + password;

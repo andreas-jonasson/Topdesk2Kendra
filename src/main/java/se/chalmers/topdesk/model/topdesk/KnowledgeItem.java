@@ -93,7 +93,12 @@ public class KnowledgeItem
 
     public String getDocumentBody()
     {
-        return translation.content.content;
+        return replaceWithAbsoluteUrl(translation.content.content, Configuration.getInstance().topdesk_base_url);
+    }
+
+    private String replaceWithAbsoluteUrl(String body, String baseUrl)
+    {
+        return body.replaceAll("/tas/secure/mango/image", baseUrl + "/tas/secure/mango/image");
     }
 
     public String getDocumentTitle()
