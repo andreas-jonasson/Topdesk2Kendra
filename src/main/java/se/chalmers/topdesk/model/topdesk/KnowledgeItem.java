@@ -2,6 +2,7 @@ package se.chalmers.topdesk.model.topdesk;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.jetbrains.annotations.NotNull;
 import se.chalmers.topdesk.Configuration;
 import se.chalmers.topdesk.model.kendra.Metadata;
 import se.chalmers.topdesk.model.kendra.MetadataAttributes;
@@ -46,9 +47,25 @@ public class KnowledgeItem
                 "</html>\n";
     }
 
+    public String getHtmlFileName()
+    {
+        return getFileNameWithoutExtension() + ".html";
+    }
+
+    public String getMetadataFileName()
+    {
+        return getFileNameWithoutExtension() + ".metadata.json";
+    }
+
+    @NotNull
+    private String getFileNameWithoutExtension()
+    {
+        return getDocumentId().replaceAll(" " , "-") + "-" + getLanguageCode();
+    }
+
     public String getMetadataJson()
     {
-        Metadata metadata = new Metadata(getDocumentId(), getMetadataAttributes(), null, getDocumentTitle(), getContent());
+        Metadata metadata = new Metadata(getDocumentId(), getMetadataAttributes(), null, getDocumentTitle(), "HTML");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         return gson.toJson(metadata);

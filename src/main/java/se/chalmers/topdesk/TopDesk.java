@@ -29,26 +29,30 @@ public class TopDesk
         ArrayList<KnowledgeItem> knowledgeItems = new ArrayList<>();
         int start = 0;
         int page_size = 100;
+        String[] languages = {"sv", "en"};
 
-        while(true)
-        {
-            String pageParameter = "start=" + start + "&page_size=" + page_size;
-            String requestUrl = concatenateGetParameters(endpoint, pageParameter, ONLY_ACTIVE_PARAMETER, FIELDS_PARAMETER);
-            HttpResponse response = getRequestWithBasicAuth(requestUrl, user, password);
-            GetKnowledgeItemRequest responseKnowledgeItems = parseKnowledgeItemRequest(response);
+        for (String currentLanguage: languages) {
+            String languageParameter = "language=" + currentLanguage;
 
-            knowledgeItems.addAll(responseKnowledgeItems.item);
+            while (true) {
+                String pageParameter = "start=" + start + "&page_size=" + page_size;
+                String requestUrl = concatenateGetParameters(endpoint, pageParameter, ONLY_ACTIVE_PARAMETER, FIELDS_PARAMETER, languageParameter);
+                HttpResponse response = getRequestWithBasicAuth(requestUrl, user, password);
+                GetKnowledgeItemRequest responseKnowledgeItems = parseKnowledgeItemRequest(response);
 
-            if (responseKnowledgeItems.item.size() < page_size)
-                break;
+                knowledgeItems.addAll(responseKnowledgeItems.item);
 
-            start += page_size;
+                if (responseKnowledgeItems.item.size() < page_size)
+                    break;
 
-            if (start > 5000) // Don't go on forever... throw exception later.
-                break;
+                start += page_size;
+
+                if (start > 5000) // Don't go on forever... throw exception later.
+                    break;
+            }
         }
 
-        //System.out.println("Number of knowledge items found: " + knowledgeItems.size());
+        System.out.println("Number of knowledge items found: " + knowledgeItems.size());
         return knowledgeItems;
     }
 
