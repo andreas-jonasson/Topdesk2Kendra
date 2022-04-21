@@ -27,12 +27,13 @@ public class TopDesk
     public static List<KnowledgeItem> getAllKnowledgeItems(String endpoint, String user, String password) throws IOException
     {
         ArrayList<KnowledgeItem> knowledgeItems = new ArrayList<>();
-        int start = 0;
-        int page_size = 100;
         String[] languages = {"sv", "en"};
 
-        for (String currentLanguage: languages) {
+        for (String currentLanguage: languages)
+        {
             String languageParameter = "language=" + currentLanguage;
+            int start = 0;
+            int page_size = 100;
 
             while (true) {
                 String pageParameter = "start=" + start + "&page_size=" + page_size;
