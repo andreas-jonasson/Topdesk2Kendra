@@ -15,24 +15,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TopDeskTest
 {
-    private static TopDesk topDesk;
-    private static String knowledgeItemsEndpoint;
-    private static String user;
-    private static String password;
-    private static List<KnowledgeItem> knowledgeItems;
+     private static List<KnowledgeItem> knowledgeItems;
+     private static final Configuration configuration = Configuration.getInstance();
 
     @BeforeAll
     static void setUpClass()
     {
-        Configuration configuration = Configuration.getInstance();
-        topDesk = new TopDesk();
-        knowledgeItemsEndpoint = configuration.topdesk_endpoint_knowledgeItems;
-        user = configuration.topdesk_credentials.topdesk_username;
-        password = configuration.topdesk_credentials.topdesk_password;
         knowledgeItems = null;
+
         try
         {
-            knowledgeItems = topDesk.getAllKnowledgeItems(knowledgeItemsEndpoint, user, password);
+            knowledgeItems = TopDesk.getAllKnowledgeItems(configuration);
         }
         catch (IOException e)
         {
@@ -45,7 +38,9 @@ class TopDeskTest
     {
         try
         {
-            assertInstanceOf(HttpResponse.class, topDesk.getRequestWithBasicAuth(knowledgeItemsEndpoint, user, password));
+            assertInstanceOf(HttpResponse.class, TopDesk.getRequestWithBasicAuth(configuration.topdesk_endpoint_knowledgeItems,
+                    configuration.topdesk_credentials.topdesk_username,
+                    configuration.topdesk_credentials.topdesk_password));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +49,7 @@ class TopDeskTest
     @Test
     public void listAllKnowledgeItems_returnsAListOfKnowledgeItem()
     {
-        if (!password.equals("password")) // Only run this test when you have valid credentials.
+        if (!configuration.topdesk_credentials.topdesk_password.equals("password")) // Only run this test when you have valid credentials.
         {
             assertNotNull(knowledgeItems, "Received null.");
             assertFalse(knowledgeItems.isEmpty(), "Received en empty List, might be ok if there are no knowledge items.");
@@ -199,4 +194,6 @@ class TopDeskTest
             }
         }
     }
+
+    //TODO Create a sample json and test if it is parsed correctly.
 }

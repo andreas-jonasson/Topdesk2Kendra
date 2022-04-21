@@ -15,14 +15,16 @@ public class Configuration
     public final String topdesk_endpoint_knowledgeItems;
     public final String topdesk_default_language;
     public final String topdesk_base_url;
+    public final String[] topdesk_languages_to_export;
 
-    public Configuration(Credentials topdesk_credentials, String topdesk_credentials_file, String topdesk_endpoint_knowledgeItems, String topdesk_default_language, String topdesk_base_url)
+    public Configuration(Credentials topdesk_credentials, String topdesk_credentials_file, String topdesk_endpoint_knowledgeItems, String topdesk_default_language, String topdesk_base_url, String[] topdesk_languages_to_export)
     {
         this.topdesk_credentials = topdesk_credentials;
         this.topdesk_credentials_file = topdesk_credentials_file;
         this.topdesk_endpoint_knowledgeItems = topdesk_endpoint_knowledgeItems;
         this.topdesk_default_language = topdesk_default_language;
         this.topdesk_base_url = topdesk_base_url;
+        this.topdesk_languages_to_export = topdesk_languages_to_export;
     }
 
 
@@ -54,12 +56,9 @@ public class Configuration
     }
 
     @Override
-    public String toString() {
-        return "Configuration = {" +
-                "topdesk_credentials=" + topdesk_credentials +
-                ", topdesk_credentials_file='" + topdesk_credentials_file + '\'' +
-                ", topdesk_endpoint_knowledgeItems='" + topdesk_endpoint_knowledgeItems + '\'' +
-                ", topdesk_base_url='" + topdesk_base_url + '\'' +
-                '}';
+    public String toString()
+    {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

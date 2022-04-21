@@ -15,20 +15,12 @@ public class ReadTopDesk
 
         try
         {
-            List<KnowledgeItem> knowledgeItems = TopDesk.getAllKnowledgeItems(configuration.topdesk_endpoint_knowledgeItems,
-                    configuration.topdesk_credentials.topdesk_username,
-                    configuration.topdesk_credentials.topdesk_password);
+            List<KnowledgeItem> knowledgeItems = TopDesk.getAllKnowledgeItems(configuration);
 
             for (KnowledgeItem item : knowledgeItems)
             {
                 File htmlFile = new File("./topdesk/" + item.getHtmlFileName());
                 File jsonFile = new File("./topdesk/" + item.getMetadataFileName());
-
-                if (htmlFile.isFile())
-                    htmlFile.delete();
-
-                if (jsonFile.exists())
-                    jsonFile.delete();
 
                 FileWriter fileWriter = new FileWriter(htmlFile);
                 fileWriter.write(item.getAsHtml());

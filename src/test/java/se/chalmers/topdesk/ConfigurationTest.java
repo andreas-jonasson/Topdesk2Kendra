@@ -27,8 +27,15 @@ class ConfigurationTest
 
     @Test
     @DisplayName("Configuration.toString() returns a string")
-    public void configuration_toStringReturnsString()
+    public void toString_ReturnsString()
     {
         assertInstanceOf(String.class, configuration.toString(), "Configuration.toString() did not return a String");
+    }
+
+    @Test
+    public void credentials_languagesToExportIsArrayWithAtLeastOneElement()
+    {
+        assertNotNull(configuration.topdesk_languages_to_export);
+        assertTrue(configuration.topdesk_languages_to_export.length >= 1);
     }
 }

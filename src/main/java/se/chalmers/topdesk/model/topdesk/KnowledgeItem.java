@@ -43,6 +43,7 @@ public class KnowledgeItem
                 "\t<title>" + getDocumentTitle() + "</title>\n" +
                 "<body>\n" +
                 "\t" + getDocumentBody() + "\n" +
+                "\t" + getKeyWordsHtml() + "\n" +
                 "</body>\n" +
                 "</html>\n";
     }
@@ -128,6 +129,19 @@ public class KnowledgeItem
         if (number != null)
             return number;
         return id;
+    }
+
+    public String getKeyWords()
+    {
+        return translation.content.keywords;
+    }
+
+    public String getKeyWordsHtml()
+    {
+        if (getLanguageCode().equals("sv"))
+            return "<p>Nyckelord: " + getKeyWords() + "</p>";
+        else
+            return "<p>Key words: " + getKeyWords() + "</p>";
     }
 
     public String getDocumentType()

@@ -24,10 +24,13 @@ public class TopDesk
     private static final String ONLY_ACTIVE_PARAMETER = "query=visibility.sspVisibility==VISIBLE";
     private static final String FIELDS_PARAMETER = "fields=parent,visibility,status,language,title,content,keywords,creationDate,modificationDate";
 
-    public static List<KnowledgeItem> getAllKnowledgeItems(String endpoint, String user, String password) throws IOException
+    public static List<KnowledgeItem> getAllKnowledgeItems(Configuration configuration) throws IOException
     {
+        String endpoint = configuration.topdesk_endpoint_knowledgeItems;
+        String user = configuration.topdesk_credentials.topdesk_username;
+        String password = configuration.topdesk_credentials.topdesk_password;
+        String[] languages = configuration.topdesk_languages_to_export;
         ArrayList<KnowledgeItem> knowledgeItems = new ArrayList<>();
-        String[] languages = {"sv", "en"};
 
         for (String currentLanguage: languages)
         {
@@ -53,7 +56,6 @@ public class TopDesk
             }
         }
 
-        System.out.println("Number of knowledge items found: " + knowledgeItems.size());
         return knowledgeItems;
     }
 
