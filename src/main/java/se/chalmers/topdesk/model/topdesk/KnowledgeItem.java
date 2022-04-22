@@ -138,6 +138,8 @@ public class KnowledgeItem
 
     public String getKeyWordsHtml()
     {
+        if (getKeyWords() == null)
+            return "";
         if (getLanguageCode().equals("sv"))
             return "<p>Nyckelord: " + getKeyWords() + "</p>";
         else
