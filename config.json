@@ -3,5 +3,6 @@
   "topdesk_endpoint_knowledgeItems": "https://chalmers.topdesk.net/tas/api/knowledgeItems",
   "topdesk_base_url": "https://chalmers.topdesk.net",
   "topdesk_default_language": "sv",
-  "topdesk_languages_to_export": ["sv", "en"]
+  "topdesk_languages_to_export": ["sv", "en"],
+  "topdesk_output_dir": "./topdesk/"
 }

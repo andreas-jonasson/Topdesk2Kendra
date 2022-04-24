@@ -15,10 +15,12 @@ public class ReadTopDesk
 
         File outputDir = new File("./topdesk/");
         if (!outputDir.exists())
+            //noinspection ResultOfMethodCallIgnored
             outputDir.mkdirs();
 
         File metadataDir = new File("./topdesk/metadata/");
         if (!metadataDir.exists())
+            //noinspection ResultOfMethodCallIgnored
             metadataDir.mkdirs();
 
         try
