@@ -13,12 +13,12 @@ public class ReadTopDesk
     {
         Configuration configuration = Configuration.getInstance();
 
-        File outputDir = new File("./topdesk/");
+        File outputDir = new File(configuration.topdesk_output_dir);
         if (!outputDir.exists())
             //noinspection ResultOfMethodCallIgnored
             outputDir.mkdirs();
 
-        File metadataDir = new File("./topdesk/metadata/");
+        File metadataDir = new File(configuration.topdesk_output_dir + "metadata/");
         if (!metadataDir.exists())
             //noinspection ResultOfMethodCallIgnored
             metadataDir.mkdirs();
@@ -29,8 +29,8 @@ public class ReadTopDesk
 
             for (KnowledgeItem item : knowledgeItems)
             {
-                File htmlFile = new File("./topdesk/" + item.getHtmlFileName());
-                File jsonFile = new File("./topdesk/metadata/" + item.getMetadataFileName());
+                File htmlFile = new File(configuration.topdesk_output_dir + item.getHtmlFileName());
+                File jsonFile = new File(configuration.topdesk_output_dir + "metadata/" + item.getMetadataFileName());
 
                 FileWriter fileWriter = new FileWriter(htmlFile);
                 fileWriter.write(item.getAsHtml());
